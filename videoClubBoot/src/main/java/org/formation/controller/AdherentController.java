@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import org.formation.metier.*;
-
+import org.formation.repository.*;
 
 @Controller
 @RequestMapping("/adherents")
 public class AdherentController {
 
 	@Autowired
-	AdherentRepository adherentRepository;
+ 	private AdherentRepository adherentRepository;
 
 	@GetMapping("/list")
 	public ModelAndView list() {
