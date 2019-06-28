@@ -2,6 +2,7 @@ package org.formation.configuration;
 
 import javax.sql.DataSource;
 
+import org.formation.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
