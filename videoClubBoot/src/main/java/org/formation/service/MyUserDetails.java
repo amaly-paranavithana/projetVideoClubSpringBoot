@@ -33,7 +33,7 @@ public class MyUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> autorities = new ArrayList<GrantedAuthority>();
 		for(UserRole userRoles :user.getRoles()) {
-			autorities.add(	new SimpleGrantedAuthority(user.getRoles().toString()));
+			autorities.add(	new SimpleGrantedAuthority(userRoles.getRole().toString()));
 		}
 		
 		return autorities;
