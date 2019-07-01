@@ -26,7 +26,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		http.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic().and().csrf().disable();
 		http.authorizeRequests().antMatchers("/rest/**").permitAll();
 		// definir les acces aux pages
-		http.authorizeRequests().antMatchers("/").permitAll();
+
+//		http.authorizeRequests().antMatchers("/").permitAll();
+
 		http.csrf().disable();
 	}
 
@@ -44,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// authen avec userdetailservice
 
 		auth.userDetailsService(myUserDetailsService).passwordEncoder(getPasswordEncoder());
-		
+
 	}
 
 	@Bean

@@ -3,7 +3,29 @@ package org.formation.metier;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
+
+import org.formation.metier.view.JsonViews;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 
@@ -15,22 +37,27 @@ import javax.persistence.*;
 		@NamedQuery(name = "Adherent.findByKeyWithArticles", query = "select distinct a from Adherent a left join fetch a.articlesEmpruntes ae left join fetch ae.film where a.numero=:numero") })
 public class Adherent {
 	@Id
+	@JsonView(JsonViews.Common.class)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAdherent")
 	@SequenceGenerator(name = "seqAdherent", sequenceName = "seq_adherent", initialValue = 100, allocationSize = 1)
 	@Column(name = "no_adherent")
 	private Integer numero;
 	@Column(name = "prenom_adherent", length = 150)
+	@JsonView(JsonViews.Common.class)
 	private String prenom;
 	@Column(name = "nom_adherent", length = 100, nullable = false)
+	@JsonView(JsonViews.Common.class)
 	private String nom;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "civilite", length = 4)
+	@JsonView(JsonViews.Common.class)
 	private Titre civilite;
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "numero", column = @Column(name = "numero_rue_adherent")),
 			@AttributeOverride(name = "rue", column = @Column(name = "rue_adherent", length = 150)),
 			@AttributeOverride(name = "codePostal", column = @Column(name = "code_postal_adherent", length = 5)),
 			@AttributeOverride(name = "ville", column = @Column(name = "ville_adherent", length = 150)) })
+	@JsonView(JsonViews.Common.class)
 	private Adresse adresse;
 	@OneToMany(mappedBy = "emprunteur", fetch = FetchType.LAZY)
 	private List<Article> articlesEmpruntes;
