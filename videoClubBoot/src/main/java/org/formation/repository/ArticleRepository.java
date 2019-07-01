@@ -19,7 +19,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	
 	@Query("select distinct a from Article as a left join fetch a.emprunteur left join fetch a.film as f left join fetch f.realisateurs as r left join fetch r.key.realisateur left join fetch r.key.film")
 	Optional<Article> findAllWithEmprunteurAndFilmAndRealisateur(@Param("film")String film);
-	
-	@Query("select a from Article a left join fetch a.film f where f.dateSortie:dateSortie")
-	Optional<Film> FindByIdWithDate(Date dateSortie);
+//	
+//	@Query("select a from Article a left join fetch a.film f where f.dateSortie:dateSortie")
+//	Optional<Film> FindByIdWithDate(Date dateSortie);
 }
