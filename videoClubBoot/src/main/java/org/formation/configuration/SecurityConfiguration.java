@@ -23,10 +23,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic().and().csrf().disable();
-		
+//		http.authorizeRequests().antMatchers("/rest/**").authenticated().and().httpBasic().and().csrf().disable();
+//		http.authorizeRequests().antMatchers("/rest/**").permitAll();
 		// definir les acces aux pages
-		http.authorizeRequests().antMatchers("/").permitAll();
+//		http.authorizeRequests().antMatchers("/").permitAll();
 	}
 
 	@Override
@@ -36,9 +36,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// deuxieme solution
 
 		// authentification avec une base de donnees
-		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("select username,password,enable from users where username=?")
-				.authoritiesByUsernameQuery("select username,role from user_role where username =?");
+//		auth.jdbcAuthentication().dataSource(dataSource)
+//				.usersByUsernameQuery("select username,password,enable from users where username=?")
+//				.authoritiesByUsernameQuery("select username,role from user_role where username =?");
 
 		// authen avec userdetailservice
 
