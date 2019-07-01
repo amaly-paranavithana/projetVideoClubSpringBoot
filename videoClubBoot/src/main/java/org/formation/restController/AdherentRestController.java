@@ -1,4 +1,4 @@
-package org.formation.rest.Controller;
+package org.formation.restController;
 
 import java.net.URI;
 import java.util.List;
