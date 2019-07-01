@@ -18,6 +18,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.formation.metier.view.JsonViews;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "film")
 public class Film {
@@ -25,10 +29,13 @@ public class Film {
 	@SequenceGenerator(name = "seqFilm", sequenceName = "seq_film", initialValue = 100, allocationSize = 1)
 	@GeneratedValue(generator = "seqFilm", strategy = GenerationType.SEQUENCE)
 	@Column(name = "id_film")
+	@JsonView(JsonViews.Common.class)
 	private Integer id;
 	@Column(name = "titre", length = 150)
+	@JsonView(JsonViews.Common.class)
 	private String titre;
 	@Column(name = "date_sortie")
+	@JsonView(JsonViews.Common.class)
 	@Temporal(TemporalType.DATE)
 	private Date dateSortie;
 	@OneToMany(mappedBy = "film")
@@ -36,6 +43,7 @@ public class Film {
 	@Version
 	private int version;
 	@OneToMany(mappedBy="key.film")
+	@JsonView(JsonViews.FilmAvecRealisateur.class)
 	private Set<FilmRealisateur> realisateurs;
 	
 	public Film() {

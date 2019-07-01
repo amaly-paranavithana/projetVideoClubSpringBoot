@@ -15,6 +15,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.formation.metier.view.JsonViews;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "realisateur")
 public class Realisateur {
@@ -22,10 +26,13 @@ public class Realisateur {
 	@SequenceGenerator(name = "seqRealisateur", sequenceName = "seq_realisateur", initialValue = 100, allocationSize = 10)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqRealisateur")
 	@Column(name = "id_realisateur")
+	@JsonView(JsonViews.Common.class)
 	private Integer id;
 	@Column(name = "prenom_realisateur", length = 200)
+	@JsonView(JsonViews.Common.class)
 	private String prenom;
 	@Column(name = "nom_realisateur", length = 200)
+	@JsonView(JsonViews.Common.class)
 	private String nom;
 	@Version
 	private int version;
