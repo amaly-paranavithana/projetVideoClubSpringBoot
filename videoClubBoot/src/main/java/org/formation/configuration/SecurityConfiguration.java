@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		http.authorizeRequests().antMatchers("/rest/**").permitAll();
 		// definir les acces aux pages
 //		http.authorizeRequests().antMatchers("/").permitAll();
+		http.csrf().disable();
 	}
 
 	@Override

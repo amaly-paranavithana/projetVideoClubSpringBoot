@@ -1,5 +1,6 @@
 package org.formation.metier;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -35,7 +36,7 @@ public abstract class Article {
 	@ManyToOne
 	@JoinColumn(name = "film_id")
 	private Film film;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "adherent_id")
 	private Adherent emprunteur;
 	@Version
