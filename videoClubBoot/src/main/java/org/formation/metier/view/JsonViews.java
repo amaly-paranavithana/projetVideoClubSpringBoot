@@ -11,5 +11,13 @@ public class JsonViews {
 	public static class AdherentAvecArticle extends Common{
 		
 	};
+	
+	public static class ArticleAvecDvd extends Common{
+		
+	};
+	public static class ArticleAvecBluRay extends Common{
+		
+	};
+
 
 }
