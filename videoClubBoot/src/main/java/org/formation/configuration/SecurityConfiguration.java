@@ -18,6 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
+	@Autowired
 	private MyUserDetailsService myUserDetailsService;
 	
 	@Override
@@ -26,9 +27,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		// definir les acces aux pages
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/**/list").authenticated();
-		http.authorizeRequests().antMatchers("/**/edit").hasRole("ADMIN");
-		http.authorizeRequests().anyRequest().authenticated().and() .formLogin().loginPage("/login").permitAll().and().logout().logoutSuccessUrl("/").permitAll();
 	}
 
 	@Override
