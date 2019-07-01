@@ -1,9 +1,11 @@
 package org.formation.repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.formation.metier.Article;
+import org.formation.metier.Dvd;
 import org.formation.metier.Film;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

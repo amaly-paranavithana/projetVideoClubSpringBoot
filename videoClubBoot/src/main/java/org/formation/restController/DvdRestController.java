@@ -6,6 +6,7 @@ import java.util.*;
 import javax.validation.Valid;
 
 import org.formation.metier.Article;
+import org.formation.metier.Dvd;
 import org.formation.metier.view.JsonViews;
 import org.formation.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
-@RequestMapping("/rest/article")
-public class ArticleRestController {
+@RequestMapping("/rest/dvd")
+public class DvdRestController {
 	
 	@Autowired
 	private ArticleRepository articleRepository;
@@ -38,37 +39,25 @@ public class ArticleRestController {
 		return list();
 	}
 	
-	@JsonView(JsonViews.ArticleAvecDvd.class)
-	@GetMapping(value = {"dvd"})
-	private ResponseEntity<List<Article>> findAllDvd(){
-		return new ResponseEntity<List<Article>>(articleRepository.findAll(), HttpStatus.OK);
-	}
-	
-	@JsonView(JsonViews.ArticleAvecBluRay.class)
-	@GetMapping(value = {"BluRay"})
-	private ResponseEntity<List<Article>> findAllBluRay(){
-		return new ResponseEntity<List<Article>>(articleRepository.findAll(), HttpStatus.OK);
-	}
-	
 	private ResponseEntity<List<Article>> list() {
 		return new ResponseEntity<List<Article>>(articleRepository.findAll(), HttpStatus.OK);
 	}
 	
 	@PostMapping(value= {"", "/"})
-	public ResponseEntity<Void> create(@Valid @RequestBody Article article, BindingResult br, UriComponentsBuilder ucb) {
+	public ResponseEntity<Void> create(@Valid @RequestBody Dvd dvd, BindingResult br, UriComponentsBuilder ucb) {
 		if(br.hasErrors()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		articleRepository.save(article);
+		articleRepository.save(dvd);
 		HttpHeaders headers = new HttpHeaders();
-		URI uri = ucb.path("/rest/article/{id}").buildAndExpand(article.getNumeroArticle()).toUri();
+		URI uri = ucb.path("/rest/article/{id}").buildAndExpand(dvd.getNumeroArticle()).toUri();
 		headers.setLocation(uri);
 		return new ResponseEntity<> (headers, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{id}")
 	@JsonView(JsonViews.Common.class)
-	public ResponseEntity<Article> findById(@PathVariable(name="numero_article") Integer id) {
+	public ResponseEntity<Dvd> findById(@PathVariable(name="numero_article") Integer id) {
 		return findById(id);
 	}
 
@@ -83,13 +72,13 @@ public class ArticleRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable(name="numero_article") Integer id, @Valid @RequestBody Article article, BindingResult br) {
+	public ResponseEntity<Void> update(@PathVariable(name="numero_article") Integer id, @Valid @RequestBody Dvd dvd, BindingResult br) {
 		Optional<Article> opt = articleRepository.findById(id);
 		if (opt.isPresent()) {
 			Article articleEnBase = opt.get();
-			articleEnBase.setNbDisques((article.getNbDisques() != null) ? article.getNbDisques():articleEnBase.getNbDisques());
-			articleEnBase.setFilm((article.getFilm() != null) ? article.getFilm():articleEnBase.getFilm());
-			articleEnBase.setEmprunteur((article.getEmprunteur() != null) ? article.getEmprunteur(): articleEnBase.getEmprunteur());
+			articleEnBase.setNbDisques((dvd.getNbDisques() != null) ? dvd.getNbDisques():articleEnBase.getNbDisques());
+			articleEnBase.setFilm((dvd.getFilm() != null) ? dvd.getFilm():articleEnBase.getFilm());
+			articleEnBase.setEmprunteur((dvd.getEmprunteur() != null) ? dvd.getEmprunteur(): articleEnBase.getEmprunteur());
 			articleRepository.save(articleEnBase);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
