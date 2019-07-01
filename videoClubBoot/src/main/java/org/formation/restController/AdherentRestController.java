@@ -57,7 +57,7 @@ public class AdherentRestController {
 		}
 		adherentRepository.save(adherent);
 		HttpHeaders headers = new HttpHeaders();
-		URI uri = uCB.path("/rest/soldat/{id}").buildAndExpand(adherent.getNumero()).toUri();
+		URI uri = uCB.path("/rest/adherent/{numero}").buildAndExpand(adherent.getNumero()).toUri();
 		headers.setLocation(uri);
 		ResponseEntity<Void> responseEntity = new ResponseEntity<>(headers,HttpStatus.CREATED);
 		return responseEntity;
